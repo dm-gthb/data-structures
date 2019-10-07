@@ -75,12 +75,63 @@ class BinarySearchTree {
       }
     }
   }
+
+  breadthFirstSearch() {
+  //      10
+  //   5     13
+  // 2  7  11  16
+  //
+  // transform to:
+  // [10, 5, 13, 2, 7, 11, 16]
+
+    const resultData = [];
+    const queue = [];
+    const node = this.root;
+    queue.push(node);
+
+    while(queue.length) {
+      node = queue.shift();
+      resultData.push(node);
+
+      if (node.left) {
+        queue.push(node.left);
+      }
+
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+
+    return resultData;
+  }
+
+  deapthFirstPreOrderSearch() {
+  //      10
+  //   5     13
+  // 2  7  11  16
+  //
+  // transform to:
+  // [10, 5, 2, 7, 13, 11, 16]
+    const resultData = [];
+    const traverse = (node) => {
+      resultData.push(node);
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
+    return resultData;
+  }
 }
+
 
 //      10
 //   5     13
 // 2  7  11  16
-
 var bsTree = new BinarySearchTree();
 bsTree.insert(10);
 bsTree.insert(5);
