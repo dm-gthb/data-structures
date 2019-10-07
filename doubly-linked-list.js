@@ -99,6 +99,37 @@ class DoublyLinkedList {
     
     return current;
   }
+
+  set(index, val) {
+    const nodeToUpdate = this.get(index);
+    if (nodeToUpdate) {
+      nodeToUpdate.value = val;
+    }
+  }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) {
+      return null;
+    }
+
+    if (index === 0) {
+      this.unshift(val);
+    }
+
+    if (index === this.length) {
+      this.push(val);
+    }
+
+    const newNode = new Node(val);
+    const beforeNewNode = this.get(index - 1);
+    const afterNewNode = beforeNewNode.next;
+
+    beforeNewNode.next = newNode;
+    afterNewNode.prev = newNode;
+    newNode.next = afterNewNode;
+    newNode.prev = beforeNewNode;
+    this.length++;
+  }
 }
 
 //          ---------->      ---------->       ----------> 
