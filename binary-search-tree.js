@@ -126,6 +126,51 @@ class BinarySearchTree {
     traverse(this.root);
     return resultData;
   }
+
+  deapthFirstPostOrderSearch() {
+  //      10
+  //   5     13
+  // 2  7  11  16
+  //
+  // transform to:
+  // [2, 7, 5, 11, 16, 13, 10]
+    const resultData = [];
+    const traverse = (node) => {
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+      resultData.push(node);
+    };
+
+    traverse(this.root);
+    return resultData;
+  }
+
+  deapthFirstInOrderSearch() {
+  //      10
+  //   5     13
+  // 2  7  11  16
+  //
+  // transform to:
+  // [2, 5, 7, 10, 11, 13, 16]
+    const resultData = [];
+    const traverse = (node) => {
+      if (node.left) {
+        traverse(node.left);
+      }
+      resultData.push(node);
+
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
+    return resultData;
+  }
 }
 
 
