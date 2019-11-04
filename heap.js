@@ -10,6 +10,11 @@ class MaxBinaryHeap {
   insert(element) {
     this.values.push(element);
     let index = this.lastIndex;
+
+    if (index === 0) {
+      return;
+    }
+
     let parentIndex = this.getParentElementIndex(index);
 
     while (this.values[index] > this.values[parentIndex]) {
@@ -19,6 +24,10 @@ class MaxBinaryHeap {
 
       index = parentIndex;
       parentIndex = this.getParentElementIndex(index);
+
+      if (parentIndex < 0) {
+        return;
+      }
     }
   }
 
@@ -48,11 +57,11 @@ class MaxBinaryHeap {
       if (rightChildIndex < length) {
         rightChild = this.values[rightChildIndex];
         if (
-            (!swapIndex && rightChild > element) ||
-            (swapIndex && rightChild > leftChild)
-          ) {
-            swapIndex = rightChildIndex;
-          }
+          (!swapIndex && rightChild > element) ||
+          (swapIndex && rightChild > leftChild)
+        ) {
+          swapIndex = rightChildIndex;
+        }
       }
 
       if (swapIndex === null) {
@@ -75,3 +84,28 @@ class MaxBinaryHeap {
     return max;
   }
 }
+
+// insertion O(log N)
+// removal O(log N)
+// search O(N)
+
+//                                           100
+//                            19                            36
+//                    17             12               25             5
+//                 9     15       6     11        13      8       1     4
+
+// values:   100   19   36   17   12   25   5   9   15   6   11   13   8   1   4
+// indexes:  0     1    2    3    4    5    6   7   8    9   10   11   12  13  14    
+
+
+// for any index of an array n...
+// the left child is stored at 2n+1
+// the right child is at 2n+2 :
+
+// 100   19   36   17   12   25   5   9   15   6   11   13   8   1   4
+// 0     1    2    3    4    5    6   7   8    9   10   11   12  13  14 
+//                      |    1    2   3   4    |
+//                           |    1   2   3    4   5    |
+
+// for any child node at index n...
+// its parent is at index (n-1)/2
