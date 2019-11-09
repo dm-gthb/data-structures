@@ -1,8 +1,6 @@
-const TABLE_LENGTH = 10;
-
 class HashTable {
-  constructor() {
-    this.keymap = new Array(TABLE_LENGTH);
+  constructor(length) {
+    this.keymap = new Array(length);
   }
 
   _hash(key) {
@@ -52,6 +50,7 @@ class HashTable {
   }
 }
 
-const ht = new HashTable();
+const ht = new HashTable(100);
 ht.set('white', '#fff');
 ht.set('black', '#000');
+console.log(ht);
